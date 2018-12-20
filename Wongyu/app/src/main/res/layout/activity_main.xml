@@ -13,18 +13,21 @@
         android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="실시간 감지 시작" />
+        android:text="실시간 감지 시작"
+        android:onClick="onClickButton"/>
 
     <Button
         android:id="@+id/button2"
         android:layout_width="123dp"
         android:layout_height="wrap_content"
-        android:text="연락처 관리" />
+        android:text="연락처 관리"
+        android:onClick="onClickButton"/>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="123dp"
         android:layout_height="wrap_content"
-        android:text="차량 사고시\n대응요령" />
+        android:text="차량 사고시\n대응요령"
+        android:onClick="onClickButton"/>
 
 </LinearLayout>
