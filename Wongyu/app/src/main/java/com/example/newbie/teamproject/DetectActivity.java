@@ -1,6 +1,7 @@
 package com.example.newbie.teamproject;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -26,7 +27,9 @@ public class DetectActivity extends AppCompatActivity implements SensorEventList
     private Sensor mAccelerometer;
 
     private LineChart mChart;
-    private boolean plotData = true;
+    private float tempx = 0;
+    private float tempy = 0;
+    private float tempz = 0;
     private String name[] = {"X axis","Y axis","Z axis"};
     private int color[] = {Color.RED,Color.GREEN,Color.BLUE};
     protected  void onCreate(Bundle savedInstanceState){
@@ -130,7 +133,16 @@ public class DetectActivity extends AppCompatActivity implements SensorEventList
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-            addEntry(event);
+        if(tempx - event.values[0] > 10 || tempx - event.values[0] < -10
+                || tempy - event.values[1] > 10 || tempy - event.values[1] < -10
+                || tempz - event.values[2] > 10 || tempz - event.values[2] < -10){
+            Intent intent1 = new Intent(getApplicationContext(), PopupActivity.class);
+            startActivity(intent1);
+        }
+        tempx = event.values[0];
+        tempy = event.values[1];
+        tempz = event.values[2];
+        addEntry(event);
     }
 
     @Override

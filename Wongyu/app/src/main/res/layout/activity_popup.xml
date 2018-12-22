@@ -1,9 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="300dp"
     android:layout_height="match_parent"
-    tools:context=".PopupActivity">
+    tools:context=".PopupActivity"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:background="#ff7a00"
+            android:gravity="center"
+            android:text="차량사고 감지"
+            android:textColor="#fff"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/info1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0.87"
+            android:gravity="center"
+            android:text="차량사고가\n감지되었습니다."
+            android:textColor="#000"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/time1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="30"
+            android:textColor="#ff0000"
+            android:textSize="60sp" />
+
+        <TextView
+            android:id="@+id/Countermeasures"
+            android:layout_width="match_parent"
+            android:layout_height="171dp"
+            android:alpha="0.87"
+            android:gravity="left"
+            android:text="초 후 자동으로 구조대 및 등록된 연락처에 사고발생 메세지를 전송합니다.\n
+사고가 아니라면 OK버튼을 눌러 구조요청을 취소 하십시오."
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:background="#00000000"
+            android:gravity="center"
+            android:onClick="mOnClose"
+            android:padding="16dp"
+            android:text="OK"
+            android:textColor="#ff7a00"
+            android:textSize="15sp" />
+    </LinearLayout>
+</LinearLayout>
