@@ -16,6 +16,8 @@ import android.os.Trace;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
@@ -128,6 +130,7 @@ public class DetectActivity extends AppCompatActivity implements SensorEventList
 
     @Override
     protected void onPause() {
+        Log.i("Detect","Call onPause");
         super.onPause();
         mSensorManager.unregisterListener(this);
     }
@@ -196,12 +199,14 @@ public class DetectActivity extends AppCompatActivity implements SensorEventList
 
     @Override
     protected void onResume() {
+        Log.i("Detect","Call onResume");
         super.onResume();
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
     protected void onDestroy(){
+        Log.i("Detect","Call onDestroy");
         mSensorManager.unregisterListener(DetectActivity.this);
         super.onDestroy();
     }
@@ -209,5 +214,9 @@ public class DetectActivity extends AppCompatActivity implements SensorEventList
     @Override
     protected void onPostResume(){
         super.onPostResume();
+    }
+
+    public void onClick(View view){
+        onBackPressed();
     }
 }

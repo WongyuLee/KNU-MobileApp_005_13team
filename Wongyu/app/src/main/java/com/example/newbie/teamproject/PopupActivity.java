@@ -26,7 +26,7 @@ public class PopupActivity extends Activity {
     private int time = 30;
     private Timer timer;
     private final android.os.Handler handler = new android.os.Handler();
-    private String phoneNo = "010-7275-3371";
+    private String phoneNo = "010-3675-1851";
     private String text = "차량사고발생!\n";
     private String Longitude;
     private String Latitude;
@@ -56,7 +56,7 @@ public class PopupActivity extends Activity {
             public void run() {
                 if(time<0){
                     try{
-                        String result = text + "사고위치 - 위도: " + 35.890382 + "\n경도:" + 128.611307;
+                        String result = text + "사고위치 - 위도: " + Longitude + "\n경도:" + Latitude;
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(phoneNo,null,result,null,null);
                     }catch (Exception e){

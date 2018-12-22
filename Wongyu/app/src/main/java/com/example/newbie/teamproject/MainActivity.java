@@ -40,8 +40,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 break;
             case R.id.button2 :
+                Intent i2 = new Intent(this, ContactActivity.class);
+                startActivity(i2);
                 break;
             case R.id.button3 :
+                Intent i3 = new Intent(this, InfoActivity.class);
+                startActivity(i3);
                 break;
         }
     }
