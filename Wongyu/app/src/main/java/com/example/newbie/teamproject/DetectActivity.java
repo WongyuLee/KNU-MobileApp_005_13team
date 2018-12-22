@@ -1,13 +1,19 @@
 package com.example.newbie.teamproject;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Trace;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -30,11 +36,47 @@ public class DetectActivity extends AppCompatActivity implements SensorEventList
     private float tempx = 0;
     private float tempy = 0;
     private float tempz = 0;
+    private double Longitude = 0;
+    private double Latitude = 0;
     private String name[] = {"X axis","Y axis","Z axis"};
     private int color[] = {Color.RED,Color.GREEN,Color.BLUE};
     protected  void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detect);
+
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+
+        LocationListener locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                Longitude = location.getLongitude();
+                Latitude = location.getLatitude();
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+            }
+        };
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED)
+            return;
+
+        if (locationManager.getAllProviders().contains(LocationManager.NETWORK_PROVIDER))
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,0,0, locationListener);
+
+        if (locationManager.getAllProviders().contains(LocationManager.GPS_PROVIDER))
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0, locationListener);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
@@ -137,6 +179,8 @@ public class DetectActivity extends AppCompatActivity implements SensorEventList
                 || tempy - event.values[1] > 10 || tempy - event.values[1] < -10
                 || tempz - event.values[2] > 10 || tempz - event.values[2] < -10){
             Intent intent1 = new Intent(getApplicationContext(), PopupActivity.class);
+            intent1.putExtra("Longitude", String.valueOf(Longitude));
+            intent1.putExtra("Latitude", String.valueOf(Latitude));
             startActivity(intent1);
         }
         tempx = event.values[0];
